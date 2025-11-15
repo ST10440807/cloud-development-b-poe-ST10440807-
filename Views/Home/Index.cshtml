@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Welcome Section -->
+<div class="bg-primary text-white text-center d-flex align-items-center" style="height:25vh;">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Welcome to Jsl's FootyShop</h1>
+        <p class="lead mb-0">Your one-stop shop for jerseys and football gear.</p>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-light btn-sm mt-2">
+            🛒 Shop Now
+        </a>
+    </div>
+</div>
+
+<!-- Showcase Section -->
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Image Banner -->
+            <img src="\Images\IMG_0056.JPG" alt="Store Banner" class="img-fluid w-100 h-auto rounded shadow style="object-fit:cover;"" />
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="bg-light py-5 text-center">
+    <h2 class="fw-bold">Ready to get your jersey?</h2>
+    <p class="lead">Check out our latest collection and find your favorite team gear.</p>
+    <a asp-controller="Product" asp-action="Index" class="btn btn-primary btn-lg">
+        Explore Products
+    </a>
+</div>

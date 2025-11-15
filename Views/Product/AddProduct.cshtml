@@ -1,0 +1,65 @@
+﻿@model ABCRetailers.Models.Product
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Add New Product</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="AddProduct" method="post" enctype="multipart/form-data">
+
+                        <!-- Product Name -->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Product_Name" id="Product_Name" placeholder="Enter product name" required />
+                            <label for="Product_Name">Product Name</label>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" name="Description" id="Description" style="height: 100px;" placeholder="Enter description"></textarea>
+                            <label for="Description">Description</label>
+                        </div>
+
+                        <!-- Size -->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Size" id="Size" placeholder="Enter size" required />
+                            <label for="Size">Size</label>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="form-floating mb-3">
+                            <input type="number" step="0.01" class="form-control" name="Price" id="Price" placeholder="Enter price" required />
+                            <label for="Price">Price</label>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" name="Quantity" id="Quantity" placeholder="Enter quantity" required />
+                            <label for="Quantity">Quantity</label>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Upload Product Image</label>
+                            <input class="form-control" type="file" name="file" id="file" accept="image/*" required />
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-plus-circle"></i> Add Product
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

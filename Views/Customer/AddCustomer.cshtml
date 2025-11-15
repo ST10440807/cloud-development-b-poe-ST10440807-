@@ -1,0 +1,38 @@
+﻿@model ABCRetailers.Models.Customer
+
+@{
+    ViewData["Title"] = "Add Customer";
+}
+
+<div class="card shadow-lg p-4">
+    <h2 class="fw-bold mb-4 text-primary"><i class="bi bi-person-plus"></i> Add New Customer</h2>
+
+    <form asp-action="AddCustomer" method="post">
+        <div class="mb-3">
+            <label asp-for="Customer_Name" class="form-label"></label>
+            <input asp-for="Customer_Name" class="form-control" placeholder="Enter customer name" />
+            <span asp-validation-for="Customer_Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="email" class="form-label"></label>
+            <input asp-for="email" class="form-control" type="email" placeholder="customer@email.com" />
+            <span asp-validation-for="email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="password" class="form-label"></label>
+            <input asp-for="password" class="form-control" type="password" placeholder="Enter password" />
+            <span asp-validation-for="password" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> Save
+            </button>
+        </div>
+    </form>
+</div>

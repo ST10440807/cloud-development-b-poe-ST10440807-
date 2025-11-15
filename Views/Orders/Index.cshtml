@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ABCRetailers.Models.Order>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="fw-bold text-light"><i class="bi bi-bag"></i> Orders</h2>
+    <a asp-action="PlaceOrder" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Place New Order
+    </a>
+</div>
+
+<div class="card shadow-lg">
+    <div class="card-body p-0">
+        <table class="table table-striped table-hover mb-0 align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Order_ID)</th>
+                    <th>@Html.DisplayNameFor(model => model.Customer_Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.Product_Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.Order_Date)</th>
+                    <th>@Html.DisplayNameFor(model => model.Order_Size)</th>
+                    <th>@Html.DisplayNameFor(model => model.Timestamp)</th>
+                    <th class="text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Order_ID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Customer_Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Product_Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Order_Date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Order_Size)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Timestamp)</td>
+
+                        <!-- Example Status Badge -->
+                        <td class="text-center">
+                            @{
+                                // You can adjust this logic if your Order model has a "Status" field
+                                var status = "Pending"; // Default
+                                var badgeClass = "bg-warning";
+
+                                if (item.Order_Date < DateTime.Now.AddDays(-5))
+                                {
+                                    status = "Completed";
+                                    badgeClass = "bg-success";
+                                }
+                                else if (item.Order_Date > DateTime.Now)
+                                {
+                                    status = "Scheduled";
+                                    badgeClass = "bg-info";
+                                }
+                            }
+
+                            <span class="badge @badgeClass px-3 py-2">
+                                @status
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ABCRetailers.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="fw-bold">⚽ Our Stock</h1>
+        <a asp-action="AddProduct" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Add New Product
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No products available. Add some to get started.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "/images/placeholder.png" : item.ImageUrl)"
+                             class="card-img-top" alt="@item.Product_Name" style="height:200px; object-fit:cover;" />
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">@item.Product_Name</h5>
+                            <p class="card-text text-muted">@item.Description</p>
+                            <p class="mb-1"><strong>Size:</strong> @item.Size</p>
+                            <p class="mb-1"><strong>Stock:</strong> @item.Quantity</p>
+                            <p class="text-success fw-bold mb-2">R @item.Price</p>
+
+                            <div class="mt-auto d-flex justify-content-between">
+                               
+
+                                <!-- Delete Form -->
+                                <form asp-action="DeleteProduct" method="post" onsubmit="return confirm('Delete @item.Product_Name?');">
+                                    <input type="hidden" name="partitionKey" value="@item.PartitionKey" />
+                                    <input type="hidden" name="rowKey" value="@item.RowKey" />
+                                    <input type="hidden" name="ImageUrl" value="@item.ImageUrl" />
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

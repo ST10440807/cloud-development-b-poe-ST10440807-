@@ -1,0 +1,67 @@
+﻿@model ABCRetailers.Models.Order
+
+@{
+    var customers = ViewData["Customer"] as List<ABCRetailers.Models.Customer>;
+    var products = ViewData["Product"] as List<ABCRetailers.Models.Product>;
+    ViewData["Title"] = "Place Order";
+}
+
+<h2 class="fw-bold mb-4 text-light"><i class="bi bi-cart-plus"></i> Place New Order</h2>
+
+@if (customers == null || customers.Count == 0 || products == null || products.Count == 0)
+{
+    <div class="alert alert-warning">
+        <i class="bi bi-exclamation-triangle"></i>
+        No customers or products available. Please add them before placing an order.
+    </div>
+}
+else
+{
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <form asp-action="PlaceOrder" method="post">
+                <!-- Select Customer -->
+                <div class="mb-3">
+                    <label asp-for="Customer_Id" class="form-label fw-semibold">Customer</label>
+                    <select asp-for="Customer_Id" class="form-select" asp-items="@(new SelectList(customers, "Customer_Id", "Customer_Name"))">
+                        <option value="">-- Select Customer --</option>
+                    </select>
+                    <span asp-validation-for="Customer_Id" class="text-danger"></span>
+                </div>
+
+                <!-- Select Product -->
+                <div class="mb-3">
+                    <label asp-for="Product_Id" class="form-label fw-semibold">Product</label>
+                    <select asp-for="Product_Id" class="form-select" asp-items="@(new SelectList(products, "Product_Id", "Product_Name"))">
+                        <option value="">-- Select Product --</option>
+                    </select>
+                    <span asp-validation-for="Product_Id" class="text-danger"></span>
+                </div>
+
+                <!-- Order Size -->
+                <div class="mb-3">
+                    <label asp-for="Order_Size" class="form-label fw-semibold">Size</label>
+                    <input asp-for="Order_Size" class="form-control" placeholder="e.g. Small, Medium, Large" />
+                    <span asp-validation-for="Order_Size" class="text-danger"></span>
+                </div>
+
+                <!-- Order Date -->
+                <div class="mb-3">
+                    <label asp-for="Order_Date" class="form-label fw-semibold">Order Date</label>
+                    <input asp-for="Order_Date" class="form-control" type="datetime-local" />
+                    <span asp-validation-for="Order_Date" class="text-danger"></span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Orders
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle"></i> Submit Order
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+}
